@@ -20,14 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start Server
-        run: npm run start &
+      - name: Run Playwright tests with server
+        run: npx start-server-and-test "npm run start" http://localhost:3000 "npx playwright test"
 
-      - name: wait for the Server
-        run: npx wait-on http://localhost:3000
-      
-      - name: Run playwright tests
-        run: npx playwright test
       
       - name: upload a playwright report
         uses: actions/upload-artifact@v4
