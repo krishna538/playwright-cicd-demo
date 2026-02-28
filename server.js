@@ -11,5 +11,5 @@ app.listen(PORT, ()=>{
     console.log(`Server running at http://localhost:${PORT}`);
 })
 
-// updated git config details
+// updated git config details updated
 
