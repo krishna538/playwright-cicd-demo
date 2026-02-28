@@ -1,0 +1,36 @@
+name: Playwright CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: self-hosted
+  
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm Install
+
+      - name: Start Server
+        run: npm run start 
+
+      - name: wait for the Server
+        run: npx wait-on http://localhost:3000
+      
+      - name: Run playwright tests
+        run: npx playwright test
+      
+      - name: upload a playwright report
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: playwright-report
